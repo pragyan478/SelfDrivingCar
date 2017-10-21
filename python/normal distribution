@@ -1,0 +1,19 @@
+# import libraries used in the notebook
+%matplotlib inline
+
+import numpy as np
+from scipy import stats
+from matplotlib import mlab
+import matplotlib.pyplot as plt
+
+# Set figure height and width
+fig_size = plt.rcParams["figure.figsize"]
+fig_size[0] = 8
+fig_size[1] = 6
+plt.rcParams["figure.figsize"] = fig_size
+
+x = np.linspace(-12, 12, 100)
+plt.title('Normal distribution \n mean = 0 \n standard deviation = ' + str(3))
+plt.xlabel('value')
+plt.ylabel('distribution')
+plt.plot(x,mlab.normpdf(x, 0, 3))    
