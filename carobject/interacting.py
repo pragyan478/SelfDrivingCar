@@ -1,7 +1,14 @@
 import numpy as np
 import car
+import color
 
 %matplotlib inline
+
+# Auto-reload function so that this notebook keeps up with 
+# changes in the class file 
+%load_ext autoreload
+%autoreload 2
+
 
 # Create a 2D world of 0's
 height = 4
@@ -36,3 +43,20 @@ for j in range(4):
     carla.turn_left()
 
 carla.display_world()
+
+
+#define colors and print them out
+color1 = color.Color(250, 0, 0)
+print(color1)
+
+color2 = color.Color(0, 50, 200)
+print(color2)
+
+#add the two colors and visualize the result!
+# Add the two colors to create a *new* color object
+new_color = color1 + color2
+new_class = color.Color(new_color[0], new_color[1], new_color[2])
+print(new_class)
+
+
+
