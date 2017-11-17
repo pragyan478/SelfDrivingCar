@@ -80,8 +80,16 @@ class Car(object):
         
         # Update the state velocity
         self.state[1] = predicted_velocity
+   
+
+    # Turn right function
+    def turn_right(self):
+        velocity = self.state[1]
+        update_vel = [ velocity[1], -velocity[0] ]
+        self.state[1] = update_vel
+        
     
-    
+
     # Helper function for displaying the world + robot position
     # Assumes the world in a 2D numpy array and position is in the form [y, x]
     # path is a list of positions, and it's an optional argument
