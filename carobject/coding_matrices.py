@@ -229,10 +229,175 @@ assert matrix_addition([[1, 2, 3],
 
 
 
+## TODO: Run this code cell to load the get_row function
+## You do not need to modify this cell
+
+def get_row(matrix, row):
+    return matrix[row]
+
+### TODO: Write a function that receives a matrix and a column number.
+###       the output should be the column in the form of a list
+
+
+### Example input:
+# matrix = [
+#    [5, 9, 11, 2],
+#    [3, 2, 99, 3],
+#    [7, 1, 8, 2]
+# ]
+#
+# column_number = 1
+
+### Example output:
+# [9, 2, 1]
+#
+
+def get_column(matrix, column_number):
+    column = []
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if j == column_number:
+                column.append(matrix[i][j])
+    return column
+
+
+### TODO: Run this code to test your get_column function
+assert get_column([[1, 2, 4], 
+                   [7, 8, 1], 
+                   [5, 2, 1]], 1) == [2, 8, 2]
+
+assert get_column([[5]], 0) == [5]
+
+
+### DOT PRODUCT OF TWO VECTORS
+### TODO: Write a function called dot_product() that
+###       has two vectors as inputs and outputs the dot product of the 
+###       two vectors. First, you will need to do element-wise
+###       multiplication and then sum the results. 
+
+### HINT: You wrote this function previously in the vector coding
+###        exercises
+def dot_product(vector_one, vector_two):
+    
+    result = 0
+    for i in range(len(vector_one)):
+        result += vector_one[i]*vector_two[i]
+    return result
+
+### TODO: Run this cell to test your results
+
+assert dot_product([4, 5, 1], [2, 1, 5]) == 18
+assert dot_product([6], [7]) == 42
 
 
 
 
 
+### MATRIX MULTIPLICATION
+### TODO: Write a function called matrix_multiplication that takes
+###       two matrices,multiplies them together and then returns
+###       the results
+###       
+###       Make sure that your function can handle matrices that contain
+###       only one row or one column. For example,
+###       multiplying two matrices of size (4x1)x(1x4) should return a
+###       4x4 matrix
+
+def matrix_multiplication(matrixA, matrixB):
+    # empty list that will hold the product of AxB
+    result = []
+    
+    for i in range(len(matrixA)):
+        result.append([])
+        for j in range(len(matrixB[0])):
+            sum_mat = 0
+            for k in range(len(matrixB)):
+                sum_mat += matrixA[i][k] * matrixB[k][j]
+            result[i].append(sum_mat)
+    
+    return result
 
 
+
+
+### MATRIX TRANSPOSE
+### TODO: Write a function called transpose() that 
+###       takes in a matrix and outputs the transpose of the matrix
+
+def transpose(matrix):
+    matrix_transpose = []
+    for j in range(len(matrix[0])):
+        matrix_transpose.append([])
+        for i in range(len(matrix)):
+            matrix_transpose[j].append(matrix[i][j])
+            
+    
+    return matrix_transpose
+
+
+    
+# IDENTITY MATRIX FOR N==1 OR N==2
+# TODO: Write a nested for loop to iterate over the rows and
+# columns of the identity matrix. Remember that identity
+# matrices are square so they have the same number of rows and columns
+# Make sure to assign 1 to the diagonal values and 0 everywhere else
+def identity_matrix(n):
+    identity = []
+    for i in range(n):
+        identity.append([])
+        for j in range(n):
+            if i==j:
+                identity[i].append(1)
+            else:
+                identity.append(0)
+    
+    return identity
+
+
+
+### TODO: Write a function called inverse_matrix() that 
+###       receives a matrix and outputs the inverse
+###       
+###       You are provided with start code that checks
+###       if the matrix is square and if not, throws an error
+###
+###       You will also need to check the size of the matrix.
+###       The formula for a 1x1 matrix and 2x2 matrix are different,
+###       so your solution will need to take this into account.
+###
+###       If the user inputs a non-invertible 2x2 matrix or a matrix
+###       of size 3 x 3 or greater, the function should raise an
+###       error. A non-invertible
+###       2x2 matrix has ad-bc = 0 as discussed in the lesson
+###
+###       Python has various options for raising errors
+###       raise RuntimeError('this is the error message')
+###       raise NotImplementedError('this functionality is not implemented')
+###       raise ValueError('The denominator of a fraction cannot be zero')
+
+def inverse_matrix(matrix):
+    
+    inverse = []
+    
+    if len(matrix) != len(matrix[0]):
+        raise ValueError('The matrix must be square')
+    
+    ## TODO: Check if matrix is larger than 2x2.
+    ## If matrix is too large, then raise an error
+    if len(matrix) > 2:
+        raise ValueError('The size cannnot be larger than 2')
+    ## TODO: Check if matrix is 1x1 or 2x2.
+    ## Depending on the matrix size, the formula for calculating
+    ## the inverse is different
+    if len(matrix) == 1:
+        inverse.append(1/matrix[0][0])
+    
+    elif len(matrix) == 2:
+        det = matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0]
+        inverse.append([matrix[1][1]/det, -matrix[0][1]/det])
+        inverse.append([-matrix[1][0]/det, matrix[0][0]])
+            
+    ## TODO: Calculate the inverse of the square 1x1 or 2x2 matrix.
+
+    print(inverse)
+    return inverse
