@@ -92,6 +92,19 @@ int main() {
     // create a new line in the terminal
     cout << endl;
 
+    
+    /*part 4*/
+    //Assigning Vector Values Using an Array
+    // declare array and assign values
+    static const float array1[] = {17.0, 10.0, 31.0, 5.0, 7.0};
+
+    // declare vector and assign values from the array
+    vector<float> vector1 (array1, array1 + sizeof(array1) / sizeof(array1[0]));
+
+    // print out the vector
+    for (int i = 0; i < vector1.size(); i++) {
+        cout << vector1[i] << " ";
+    }
 
     return 0;
 }
