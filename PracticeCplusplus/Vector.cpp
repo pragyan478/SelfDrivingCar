@@ -99,6 +99,10 @@ int main() {
     static const float array1[] = {17.0, 10.0, 31.0, 5.0, 7.0};
 
     // declare vector and assign values from the array
+    //you are initializing vector1 by saying, 
+    //"look at where the beginning of array1 is stored in memory and then 
+    //look at where the end of array1 is stored in memory. 
+    //Iterate through those locations to fill vector1".
     vector<float> vector1 (array1, array1 + sizeof(array1) / sizeof(array1[0]));
 
     // print out the vector
