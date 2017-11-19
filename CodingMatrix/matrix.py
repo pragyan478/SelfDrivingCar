@@ -70,15 +70,17 @@ class Matrix(object):
         # TODO - your code here
         det = self.determinant()
         if self.h == 1 :
-            return Matrix([1/det])
+            return 1/self[0][0]
         if self.h == 2 :
-            return Matrix([ [self[1][1]/det, -self[0][1]/det], [-self[1][0]/det, self[0][0]/det] ])
+            #return [[self[1][1]/det, -self[0][1]/det], [-self[1][0]/det, self[0][0]/det]]
+            return 1/self.determinant() * (self.trace()*identity(2) - self)
          
 
     def T(self):
         """
         Returns a transposed copy of this Matrix.
         """
+        
         # TODO - your code here
         mat_trans = []
         for i in range(self.w):
@@ -185,6 +187,18 @@ class Matrix(object):
         #   
         # TODO - your code here
         #
+        
+        #if other is not matrix
+        if isinstance(other, numbers.Number):
+            mat_rmul=[]
+            for i in range(self.h):
+                mat_rmul.append([])
+                for j in range(self.w):
+                    mat_rmul[i].append(other*self[i][j])
+            return Matrix(mat_rmul)  
+            
+            
+        #if slef and other are both matrices
         mat_mul = []
         for i in range(self.h):
             mat_mul.append([])
