@@ -8,7 +8,10 @@ class Gaussian
 		// constructor functions
 		Gaussian ();
 		Gaussian (float, float);
-
+		
+		//You would declare set and get functions as public 
+		//so that objects could have access to these functions.
+		
 		// change value of average and standard deviation 
 		void setMu(float);
 		void setSigma2(float);
