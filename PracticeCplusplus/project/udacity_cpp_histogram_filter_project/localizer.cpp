@@ -38,11 +38,19 @@ using namespace std;
            0.25 0.25
            0.25 0.25
 */
-vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
+vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) 
+{
 	vector< vector <float> > newGrid;
-
 	// your code here
-	
+    vector <float> newRow;
+    int area = grid.size() * grid[0].size();
+    for (int i =0 ; i<grid.size() ; i++){
+        for (int j=0 ; j<grid[0].size() ; j++){
+            newRow.push_back(1./area);
+        }
+        newGrid.push_back(newRow);
+    }
+
 	return newGrid;
 }
 
