@@ -14,7 +14,6 @@
 #include "helpers.cpp"
 #include <stdlib.h>
 #include "debugging_helpers.cpp"
-
 using namespace std;
 
 /**
@@ -98,8 +97,19 @@ vector< vector <float> > sense(char color,
 	float p_miss) 
 {
 	vector< vector <float> > newGrid;
-
+    vector <float> newRow;
 	// your code here
+    for (int i=0 ; i<grid.size() ; i++){
+        newRow.clear();
+        for (int j=0 ; j<grid[0].size() ; j++){
+            if(grid[i][j] == color )
+                newRow.push_back(beliefs[i][j]*p_hit);
+            else
+                newRow.push_back(beliefs[i][j]*p_miss); 
+        }
+        newGrid.push_back(newRow);
+    }
+
 
 	return normalize(newGrid);
 }
