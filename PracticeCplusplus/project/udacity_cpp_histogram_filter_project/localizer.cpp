@@ -40,7 +40,6 @@ using namespace std;
 vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) 
 {
 	vector< vector <float> > newGrid;
-	// your code here
     vector <float> newRow;
     int area = grid.size() * grid[0].size();
     for (int i =0 ; i<grid.size() ; i++){
@@ -98,7 +97,6 @@ vector< vector <float> > sense(char color,
 {
 	vector< vector <float> > newGrid;
     vector <float> newRow;
-	// your code here
     for (int i=0 ; i<grid.size() ; i++){
         newRow.clear();
         for (int j=0 ; j<grid[0].size() ; j++){
@@ -156,10 +154,14 @@ vector< vector <float> > move(int dy, int dx,
 	vector < vector <float> > beliefs,
 	float blurring) 
 {
-
-	vector < vector <float> > newGrid;
-
-	// your code here
-
+    int i, j;
+    int height = beliefs.size();
+    int width = beliefs[0].size();
+	vector < vector <float> > newGrid = zeros(height, width);
+    for (i=0 ; i<beliefs.size() ; i++){
+        for(j=0 ; j<beliefs[0].size() ;j++){
+            newGrid[(i+dy) % height][(j+dx) % width] = beliefs[i][j] ;       
+        }
+    }
 	return blur(newGrid, blurring);
 }

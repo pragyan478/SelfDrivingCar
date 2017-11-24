@@ -160,7 +160,6 @@ bool test_move() {
 
 	correct = zeros(3,3);
 	correct[0][0] = 1.0;
-
 	out = move(dy, dx, in, blurring);
 
 	bool right = close_enough(correct, out);
