@@ -36,14 +36,15 @@ int main() {
     duration_three = ( std::clock() - start_three ) / (double) CLOCKS_PER_SEC;
 
                                  
-    // print the matrices to the terminal
-//    cout << "matrix \n";
-//    print(matrix_unreserved);
-//    cout << "matrix_improved \n";
-//    print(matrix_reserved);
-//    cout << "matrix_improved \n";
-//    print(matrix_initialized);
-
+    //print the matrices to the terminal
+/*
+    cout << "matrix \n";
+    print(matrix_unreserved);
+    cout << "matrix_improved \n";
+    print(matrix_reserved);
+    cout << "matrix_improved \n";
+    print(matrix_initialized);
+*/
                                  
     // print the time results to the terminal
     cout << "duration milliseconds reserved: " << 1000 * duration_one << '\n';
