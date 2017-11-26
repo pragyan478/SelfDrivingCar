@@ -3,7 +3,8 @@
 using namespace std;
 vector < vector<int> > initialize_matrix_improved(int num_rows, int num_cols, int initial_value) {
     
-    vector < vector<int> > matrix;
+    vector < vector<int> > matrix (num_rows, vector<int> (num_cols, initial_value));
+    /*
     vector<int> new_row;
     
     for (int i = 0; i < num_rows; i++) {
@@ -13,6 +14,7 @@ vector < vector<int> > initialize_matrix_improved(int num_rows, int num_cols, in
         }
         matrix.push_back(new_row);
     }    
-    
+    */
+
     return matrix;
 }
