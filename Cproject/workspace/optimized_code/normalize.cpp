@@ -2,34 +2,31 @@
 using namespace std;
 
 // OPTIMIZATION: Pass variable by reference
-vector< vector<float> > normalize(vector< vector <float> > grid) {
+vector< vector<float> > normalize(vector< vector <float> > &grid) {
 
-  	// OPTIMIZATION: Avoid declaring and defining 				// intermediate variables that are not needed.
-	float total = 0.0;
-	int i;
-	int j;
-	vector<float> row;
-	vector<float> newRow;
-	float oldProb;
-	for (i = 0; i < grid.size(); i++)
+  	// OPTIMIZATION: Avoid declaring and defining 				
+    // intermediate variables that are not needed.
+	static float total = 0.0;
+	static int i, j;
+	static float oldProb;
+    static int height = grid.size();
+    static int width = grid[0].size();
+	for (i = 0; i < height; i++)
 	{
-		row = grid[i];
-		for (j=0; j< row.size(); j++)
+		for (j=0; j< width; j++)
 		{
-			oldProb = row[j];
+			oldProb = grid[i][j];
 			total += oldProb;
 		}
 	}
-
 	vector< vector<float> > newGrid;
-
-	for (i = 0; i < grid.size(); i++) {
-		vector<float> row = grid[i];
+    newGrid.reserve(height);
+    vector <float> newRow;
+    newRow.reserve(width);
+	for (i = 0; i < height; i++) {
 		newRow.clear();
-		for (j=0; j< row.size(); j++) {
-			float oldProb = row[j];
-			float newProb = oldProb / total;
-			newRow.push_back(newProb);
+		for (j=0; j< width; j++) {
+			newRow.push_back(grid[i][j] / total);
 		}
 		newGrid.push_back(newRow);
 	}

@@ -2,7 +2,8 @@
 
 using namespace std;
 
-vector< vector <float> > sense(char color, vector< vector <char> > grid, vector< vector <float> > beliefs,  float p_hit, float p_miss) 
+vector< vector <float> > sense(char color, vector< vector <char> > grid, 
+        vector< vector <float> > beliefs,  float p_hit, float p_miss) 
 {
 	vector< vector <float> > newGrid;
 	vector<float> row, newRow;

@@ -3,36 +3,33 @@
 using namespace std;
 
 // OPTIMIZATION: Pass larger variables by reference
-vector< vector <float> > sense(char color, vector< vector <char> > grid, vector< vector <float> > beliefs,  float p_hit, float p_miss) 
+vector< vector <float> > sense(char color, vector< vector <char> > &grid, 
+        vector< vector <float> > &beliefs,  float p_hit, float p_miss) 
 {
 	// OPTIMIZATION: Is the newGrid variable necessary?
   	// Could the beliefs input variable be updated directly?
   	vector< vector <float> > newGrid;
 	vector<float> row, newRow;
 
-	float prior, p;
+	static char cell;
 
-	char cell;
-
-	int i, j, height, width;
+	static int i, j, height, width;
 	height = grid.size();
 	width = grid.size();
 
-	for (i=0; i<grid.size(); i++) {
+	for (i=0; i<height; i++) {
 		newRow.clear();
-		for (j=0; j<grid[0].size(); j++) {
-          	// OPTIMIZATION: Which of these variables are 					needed?
-			prior = beliefs[i][j];
+		for (j=0; j<width; j++) {
+          	// OPTIMIZATION: Which of these variables are needed?
 			cell = grid[i][j];
 			if (cell == color) {
-				p = prior * p_hit;
+				newRow.push_back(beliefs[i][j] * p_hit);
 			}
             // OPTIMIZATION: if else statements might be 
           	// 	faster than two if statements
-			if (cell != color) {
-				p = prior * p_miss;
+			else{
+				newRow.push_back(beliefs[i][j] * p_miss);
 			}
-			newRow.push_back(p);
 		}
 		newGrid.push_back(newRow);
 	}
