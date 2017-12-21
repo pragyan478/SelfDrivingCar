@@ -8,16 +8,55 @@ def days_between_dates(y1, m1, d1, y2, m2, d2):
     #  it yet though! 
 
     # check if current date is later than birthdate
-    assert (isDateBefore(y1, m1, d1, y2, m2, d2))
+    days = 0
+    if(isDateBefore(y1, m1, d1, y2, m2, d2) == False):
+        if(y1 == y2 and m1 == m2 and d1 == d2):
+            return 0;
+        else:
+            assert isDateBefore(y1, m1, d1, y2, m2, d2)
+            
+    while(isDateBefore(y1, m1, d1, y2, m2, d2)):
+        y1, m1, d1 = nextDate(y1, m1, d1)
+        days += 1
     
-    
-    return 0
-
+    return days
 
 
 def nextDate(y1, m1, d1):
     mon31 = [1, 3, 5, 7, 8, 10, 12]
     mon30 = [4, 6, 9, 11]
+
+    if m1 in mon31:
+        if(d1 == 31):
+            if(m1 == 12):
+                return (y1+1, 1, 1)
+            else:
+                return (y1, m1+1, 1)
+        else:
+            return (y1, m1, d1+1)
+
+    elif m1 in mon30:
+        if(d1 == 30):
+            if(m1 == 12):
+                return (y1+1, 1, 1)
+            else:
+                return (y1, m1+1, 1)
+        else:
+            return (y1, m1, d1+1)
+
+    #february
+    else :
+        if(isLeapYear(y1, m1, d1) == True):
+            if(d1 == 29):
+                return (y1, m1+1, 1)
+            return (y1, m1, d1+1)
+
+        else :
+            if(d1 == 28):
+                return (y1, m1+1, 1)
+            return (y1, m1, d1+1)
+
+
     
 def isLeapYear(y1, m1, d1):
     if(m1 == 2):
@@ -57,6 +96,7 @@ def test_days_between_dates():
     assert(days_between_dates(2017, 12, 30, 
                               2018, 1,  1)  == 2)
     # test full year difference
+    print(days_between_dates(2012, 6, 29, 2013, 7, 29))
     assert(days_between_dates(2012, 6, 29,
                               2013, 7, 29)  == 365)
     
@@ -81,8 +121,23 @@ def test_isLeapYear():
     assert(isLeapYear(2000, 02, 03) == True)
 
 
+def test():
+    test_cases = [((2012,1,1,2012,2,28), 58), 
+                  ((2012,1,1,2012,3,1), 60),
+                  ((2011,6,30,2012,6,30), 366),
+                  ((2011,1,1,2012,8,8), 585 ),
+                  ((1900,1,1,1999,12,31), 36523)]
+    
+    for (args, answer) in test_cases:
+        result = days_between_dates(*args)
+        if result != answer:
+            print "Test with data:", args, "failed"
+            print("result = ", result)
+        else:
+            print "Test case passed!"
 
+test()
 
 #test_days_between_dates()
-test_isLeapYear()
+#test_isLeapYear()
 
